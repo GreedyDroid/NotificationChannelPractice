@@ -2,6 +2,7 @@ package com.example.sayed.notificationchannelpractice;
 
 import android.app.Notification;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 import android.support.annotation.RequiresApi;
@@ -81,10 +82,17 @@ public class MainActivity extends AppCompatActivity {
      */
 
     public void goToNotificationSettings(String channel){
-        Intent intent= new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS);
-        intent.putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName());
-        intent.putExtra(Settings.EXTRA_CHANNEL_ID, channel);
-        startActivity(intent);
+
+     //   intent.setData(Uri.parse("package:" + getPackageName()));
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            Intent intent= new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS);
+            intent.putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName());
+            intent.putExtra(Settings.EXTRA_CHANNEL_ID, channel);
+            startActivity(intent);
+        }else {
+            startActivity(new Intent(Settings.ACTION_SOUND_SETTINGS).putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName()));
+        }
     }
     /**
      * View model for interacting with Activity UI elements. (Keeps core logic for sample
@@ -103,9 +111,9 @@ public class MainActivity extends AppCompatActivity {
             titleSecondary = root.findViewById(R.id.main_secondary_title);
             ((Button)root.findViewById(R.id.main_secondary_send1)).setOnClickListener(this);
             ((Button)root.findViewById(R.id.main_secondary_send2)).setOnClickListener(this);
-            (root.findViewById(R.id.main_secondary_config)).setOnClickListener(this);
+            ((ImageButton)root.findViewById(R.id.main_secondary_config)).setOnClickListener(this);
 
-            (root.findViewById(R.id.btnA)).setOnClickListener(this);
+            ((Button)root.findViewById(R.id.btnA)).setOnClickListener(this);
         }
         private String getTitlePrimaryText(){
             if (titlePrimary != null){
