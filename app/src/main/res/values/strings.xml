@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">NotificationChannelPractice</string>
+    <string name="noti_channel_default">Default notification</string>
+    <string name="noti_channel_second">High priority notification</string>
+    <string name="primary1_body">primary 1 notification</string>
+    <string name="primary2_body">primary 2 notification</string>
+    <string name="secondary1_body">secondary 1 notification</string>
+    <string name="secondary2_body">secondary 2 notification</string>
+</resources>
